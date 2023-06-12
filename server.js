@@ -24,6 +24,8 @@ const connect = async () => {
 app.use(cors({origin: "http://localhost:5173", credentials: true}));  //Credential true e para passar os cookies to client para o server
 app.use(express.json());  //TO SEND JSON INTO THE CONTROLLERS
 app.use(cookieParser());  
+
+
 app.use("/api/auth", authenticationRoute);
 
 app.use("/api/users", userRoute);

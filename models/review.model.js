@@ -6,7 +6,7 @@ const ReviewSchema = new Schema({
     type:String,
     required:true,
   },
-  adId:{
+  gigId:{
     type:String,
     required:true,
   },
@@ -15,7 +15,7 @@ const ReviewSchema = new Schema({
     required:true,
     enum:[1,2,3,4,5]
   },
-  description:{
+  desc:{
     type:String,
     required:true,
   },

@@ -2,10 +2,6 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const OrderSchema = new Schema({
-  userId:{
-    type:String,
-    required:true,
-  },
   adId:{
     type:String,
     required:true,
@@ -23,7 +19,7 @@ const OrderSchema = new Schema({
     required:true,
   },
 
-  buyerID:{
+  buyerId:{
     type:String,
     required:true,
   },
@@ -31,7 +27,7 @@ const OrderSchema = new Schema({
     type:String,
     required:true,
   },
-  isPurchased:{
+  isCompleted:{
     type:Boolean,
     default:false,
   },

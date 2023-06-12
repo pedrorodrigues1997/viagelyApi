@@ -1,7 +1,51 @@
+import createError from "../utils/createError.js";
+import Order from "../models/order.model.js";
+import Gig from "../models/ad.model.js";
 
 
-export  const deleteUser = (req, res) =>{
 
-    //TODO
-    res.send("from controller");
-}
+
+
+
+export  const createOrder = async (req, res, next) =>{
+    try{
+            const gig = await Gig.findById(req.params.gigId);  //Vir no PARAMS O id é porque está no URL
+                        //SE NAO TIVER AWAIT E COMO SE NUNCA CHAGASSE LOGO DA ERROS TIPO NAO ENCONTRAR OS DADOS NO POSTMAN
+
+            const newOrder = new Order({
+                adId: gig._id,
+                image: gig.cover,
+                title: gig.title,
+                buyerId: req.userId,
+                sellerId: gig.userId,
+                price: gig.price,
+                payment_intent: "temproorary"
+
+
+            });
+
+
+            await newOrder.save();
+            res.status(200).send("Success Purchase");
+
+
+    }catch(err){
+        next(err);
+    }
+   
+};
+
+
+export  const getOrders = async (req, res, next) =>{
+    try{
+           const orders = await Order.find({
+            ...(req.isSeller ? { sellerId: req.userId } : { buyerId: req.userId }),
+            isCompleted: true,
+          });
+      
+          res.status(200).send(orders);
+    }catch(err){
+        next(err);
+    }
+   
+};
