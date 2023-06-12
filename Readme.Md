@@ -2,6 +2,10 @@ List of plugins and dependencies that need to be installed:
 
 
 
+Client link :
+http://localhost:5173/
+
+Server is http://localhost:8800/
 
 
 
