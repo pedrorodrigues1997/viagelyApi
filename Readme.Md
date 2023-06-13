@@ -21,3 +21,9 @@ server.js, besides a lot of other things, decides which route should be called o
 Commands: Server start 
 cd into folder api, and "yarn start"
 cd into client and "yarn dev"
+
+
+Cat Cards that appear on main page are loaded from data.js file
+
+Calls for ads : 
+Link to={`/ads?category=${card.category}`}>
