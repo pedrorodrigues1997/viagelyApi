@@ -30,5 +30,16 @@ cd into client and "yarn dev"
 Cat Cards that appear on main page are loaded from data.js file
 
 Calls for ads : 
-Link to={`/ads?category=${card.category}`}>
+Link to={`/ads?cat=${card.cat}`}>
 
+
+
+
+
+
+
+
+//////////////////////STRIPE/////////////////////////////////
+
+
+Secret key do Stripe vem para o backend no order controller

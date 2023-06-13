@@ -57,7 +57,7 @@ export  const getAds = async (req, res, next) =>{
   const q = req.query;
   const filters = {
     ...(q.userId && { userId: q.userId }),
-    ...(q.category && { category: q.category }),
+    ...(q.cat && { cat: q.cat }),
     ...((q.min || q.max) && {
       price: {
         ...(q.min && { $gt: q.min }),

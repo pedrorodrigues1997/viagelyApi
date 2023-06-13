@@ -10,7 +10,7 @@ const adSchema = new Schema({
     type:String,
     required:true,
   },
-  category:{
+  cat:{
     type:String,
     required:true,
   },
@@ -20,7 +20,7 @@ const adSchema = new Schema({
   },
   location:{
     type:String,
-    required:true,
+    required:false,
   },
   cover:{
     type:String,
@@ -46,9 +46,13 @@ const adSchema = new Schema({
     type:String,
     required:true,
   },
-  shortDescription:{
+  shortDesc:{
     type:String,
     required:true,
+  },
+  features: {
+    type: [String],
+    required: false,
   },
   sales:{
     type: Number,
