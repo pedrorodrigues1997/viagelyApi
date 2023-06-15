@@ -37,7 +37,6 @@ export const login = async (req, res, next) =>{
 
         const token = jwt.sign({
             id:user._id,
-            isSeller: user.isSeller,
         }, process.env.JWT_KEY);
 
         const {password, ...info} = user._doc; //Isto é apenas para extrair e enviar o user sem password

@@ -3,9 +3,6 @@ import Ad from "../models/ad.model.js";
 
 export  const createAd = async (req, res, next) =>{
 
-    if(!req.isSeller) return next(createError(403, "Only sellers can create a Ad!"));
-
-
     const newAd = new Ad({
         userId:req.userId,
         ...req.body

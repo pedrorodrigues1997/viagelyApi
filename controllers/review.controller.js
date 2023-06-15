@@ -4,7 +4,6 @@ import createError from "../utils/createError.js";
 
 
 export  const createReview = async (req, res, next) =>{
-    if(req.isSeller) return next(createError(403, "Sellers can't create a review!"));
 
     const newReview = new Review({
         userId: req.userId,
@@ -22,6 +21,8 @@ export  const createReview = async (req, res, next) =>{
 
 
         //Ver se o user comprou o produto para poder fazer review
+
+        //review your own add should not be possible
 
 
 
