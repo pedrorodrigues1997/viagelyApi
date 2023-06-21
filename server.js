@@ -6,6 +6,7 @@ import adRoute from "./routes/ad.route.js"
 import orderRoute from "./routes/order.route.js"
 import reviewRoute from "./routes/review.route.js"
 import authenticationRoute from "./routes/auth.route.js"
+import webhookRoute from "./routes/webhook.route.js"
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
@@ -32,6 +33,7 @@ app.use("/api/users", userRoute);
 app.use("/api/ads", adRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/reviews", reviewRoute);
+app.use("/api/webhooks", webhookRoute)
 
 app.use((err, req, res, next) => {
 

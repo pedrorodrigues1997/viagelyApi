@@ -28,6 +28,11 @@ const userSchema = new Schema({
     type:String,
     required:false,
   },
+  balance:{
+    type:Number,
+    required:false,
+    default:0
+  },
 },{
     timestamps:true
 });

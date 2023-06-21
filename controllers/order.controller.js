@@ -53,7 +53,6 @@ export  const getOrders = async (req, res, next) =>{
 
 export const intent = async (req, res, next) => {
     const stripe = new Stripe("sk_test_51NIXdEFdEw69adsIg7rtK9zfGHrwJQ1mZ2uthnlkUzaqJjLOtfHqjM9mbbf99gaMgV5O0WRo4JJHirB6XKabH6Nq00GzsrB36z");
-  
     const gig = await Gig.findById(req.params.id);
   
     const paymentIntent = await stripe.paymentIntents.create({
@@ -63,6 +62,7 @@ export const intent = async (req, res, next) => {
         enabled: true,
       },
     });
+    console.log("intent " + req.params);
   
     const newOrder = new Order({
         adId: gig._id,
