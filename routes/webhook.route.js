@@ -1,15 +1,14 @@
 import express from "express"
-import { verifyToken } from "../middleware/jwt.js";
 import {
-    paymentSuccessFromWebhook
+    paymentSuccessFromWebhook 
 } from "../controllers/webhook.controller.js";
-
+import Stripe from "stripe";
 
 
 const router = express.Router();
 
 
-router.post("/success", paymentSuccessFromWebhook);
+router.post("/success", express.raw({ type: 'application/json' }),paymentSuccessFromWebhook);
 
 
 export default router;

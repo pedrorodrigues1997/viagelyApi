@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import createError from "../utils/createError.js";
+import crypto from 'crypto';
 
 export const verifyToken = (req, res, next) => {
   const token = req.cookies.accessToken;
