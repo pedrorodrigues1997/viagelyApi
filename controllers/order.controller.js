@@ -54,6 +54,8 @@ export  const getOrders = async (req, res, next) =>{
 export const intent = async (req, res, next) => {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
     const gig = await Gig.findById(req.params.id);
+
+    if(req.userId === gig.userId) return next(createError(502, "You cannot buy your own product"));
   
     const paymentIntent = await stripe.paymentIntents.create({
       amount: gig.price * 100,
@@ -62,11 +64,10 @@ export const intent = async (req, res, next) => {
         enabled: true,
       },
     });
-    console.log("intent " + req.params);
   
     const newOrder = new Order({
-        adId: gig._id,
-        image: gig.cover,
+      adId: gig._id,
+      image: gig.cover,
       title: gig.title,
       buyerId: req.userId,
       sellerId: gig.userId,

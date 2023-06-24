@@ -87,9 +87,25 @@ const handlePaymentIntentSucceeded = async (receivedHookEvent) => {
                  }
               });
 
+
               if(!seller) return createError(404, "Seller not found for that Order");
 
-       
+
+              //Add paymentConfirmed adId to buyer
+              const buyer = await User.findOneAndUpdate({
+                _id: orders.buyerId,
+              },
+              {
+                $push:{
+                  purchasedOrders: orders.adId,
+                 }
+              });
+
+              if(!buyer) return createError(404, "Buyer not found for that Order");
+              //Send email to seller
+
+              //Send email to buyer with the PDF file
+              
            
      }catch(err){
          console.log(err);

@@ -16,6 +16,10 @@ const userSchema = new Schema({
     type:String,
     required:true,
   },
+  desc:{
+    type:String,
+    required:true,
+  },
   image:{
     type:String,
     required:false,
@@ -32,6 +36,10 @@ const userSchema = new Schema({
     type:Number,
     required:false,
     default:0
+  },
+  purchasedOrders:{
+    type:[String],
+    required:false,
   },
 },{
     timestamps:true
