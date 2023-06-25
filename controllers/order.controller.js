@@ -1,6 +1,8 @@
 import createError from "../utils/createError.js";
 import Order from "../models/order.model.js";
 import Gig from "../models/ad.model.js";
+import User from "../models/user.model.js";
+
 import Stripe from "stripe";
 
 
@@ -50,12 +52,29 @@ export  const getOrders = async (req, res, next) =>{
    
 };
 
-
+/**
+ * 
+ * Create a payment intent for stripe
+ * Check if the Creator is buying hes own Ad
+ * Check if the user already bought this Ad
+ * If not create intent and order.
+ * It willl only be validated after stripe sends webhooks
+ * @returns 
+ */
 export const intent = async (req, res, next) => {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
     const gig = await Gig.findById(req.params.id);
 
     if(req.userId === gig.userId) return next(createError(502, "You cannot buy your own product"));
+
+    const user = await User.findOne({
+      _id: req.userId
+    });
+
+    if(user && user.purchasedOrders.includes(gig._id)){
+      return next(createError(502, "You cannot buy a product you already bought"));
+    }
+
   
     const paymentIntent = await stripe.paymentIntents.create({
       amount: gig.price * 100,

@@ -37,6 +37,16 @@ const userSchema = new Schema({
     required:false,
     default:0
   },
+  numberOfAds:{
+    type:Number,
+    required:false,
+    default:0
+  },
+  emailVerified:{
+    type:Boolean,
+    required:false,
+    default:false
+  },
   purchasedOrders:{
     type:[String],
     required:false,

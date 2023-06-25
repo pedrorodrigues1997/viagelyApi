@@ -1,7 +1,16 @@
 import createError from "../utils/createError.js";
 import Ad from "../models/ad.model.js";
+import User from "../models/user.model.js";
+
 
 export  const createAd = async (req, res, next) =>{
+
+
+    const user = await User.findById(req.userId); 
+
+    if(!user)  return next(createError(403, "Current User not found"));
+
+    if(user.numberOfAds > 7) return next(createError(403, "Max number of Ads created"));
 
     const newAd = new Ad({
         userId:req.userId,

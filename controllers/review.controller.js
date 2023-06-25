@@ -1,9 +1,17 @@
 import Review from "../models/review.model.js";
 import Ad from "../models/ad.model.js";
+import User from "../models/user.model.js"
 import createError from "../utils/createError.js";
 
 
 export  const createReview = async (req, res, next) =>{
+
+
+
+    const user = await User.findById(req.userId); 
+
+    if(!user)  return next(createError(403, "User not found"));
+
 
     const newReview = new Review({
         userId: req.userId,
