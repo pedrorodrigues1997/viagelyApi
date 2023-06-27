@@ -40,6 +40,9 @@ Link to={`/ads?cat=${card.cat}`}>
 
 
 //////////////////////STRIPE/////////////////////////////////
+https://aa49-2001-8a0-6e09-5800-75c7-d2b5-ef00-b9a0.eu.ngrok.io
+
+Ngrok é usado para testes para redirecionar os webhooks do stripe para o nosso ambiente local
 
 
-Secret key do Stripe vem para o backend no order controller
+fazemos o comando ngrok http 8800 no programa ngrok e copiamos o link parecido com o de cima para o webhook do Stripe
