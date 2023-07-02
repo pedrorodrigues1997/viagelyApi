@@ -16,6 +16,10 @@ const userSchema = new Schema({
     type:String,
     required:true,
   },
+  desc:{
+    type:String,
+    required:true,
+  },
   image:{
     type:String,
     required:false,
@@ -26,6 +30,25 @@ const userSchema = new Schema({
   },
   phoneNumber:{
     type:String,
+    required:false,
+  },
+  balance:{
+    type:Number,
+    required:false,
+    default:0
+  },
+  numberOfAds:{
+    type:Number,
+    required:false,
+    default:0
+  },
+  emailVerified:{
+    type:Boolean,
+    required:false,
+    default:false
+  },
+  purchasedOrders:{
+    type:[String],
     required:false,
   },
 },{

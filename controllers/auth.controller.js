@@ -13,8 +13,19 @@ export const register = async (req, res, next) =>{
         const newUser = new User({
             ... req.body,
             password: hash,
+            balance: 0,
+            purchasedOrders: [],
+            numberOfAds: 0,
+            emailVerified: false
             
         });
+
+        //If emaail already exists.
+        //If username
+        //Return different errors in each so that we can show the user
+        //if(req.body.balance) return next(createError(502, "Forbidden operation"));
+        //if(req.body.purchasedOrders) return next(createError(502, "Forbidden operation"));
+        //if(req.body.numberOfAds) return next(createError(502, "Forbidden operation"));
 
         await newUser.save();
         res.status(201).send("User has been created.");
@@ -27,6 +38,7 @@ export const register = async (req, res, next) =>{
 
 
 export const login = async (req, res, next) =>{
+    
     try{
         const user = await User.findOne({ username: req.body.username});    //Encontra user na DB
        
