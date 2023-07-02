@@ -10,13 +10,28 @@ import crypto from 'crypto';
 
 
 
+export  const getUserStripeAccountAndTransferForCheckout = async (req, res, next) =>{
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+     //Encontra user na DB
 
+
+  
+
+  const accountLink = await stripe.accountLinks.create({
+    account: '{{CONNECTED_ACCOUNT_ID}}'
+  ,
+    refresh_url: 'https://example.com/reauth',
+    return_url: 'https://example.com/return',
+    type: 'account_onboarding',
+  });
+
+}
 
 
 
 export  const paymentSuccessFromWebhook = async (request, response, next) =>{
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-  const endpointSecret = 'whsec_exezuvZDN6ButRTyadMfYC663HUcxEk7';
+  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
   const sig = request.headers['stripe-signature'];
   let event;

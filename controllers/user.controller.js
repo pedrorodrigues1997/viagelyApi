@@ -21,6 +21,7 @@ const user = await User.findById(req.params.id)
 
 export  const getUser = async (req, res, next) =>{
 
+if(!req.params.id || !req.params) return next(createError(404, "Nothing to search for"));
 
 
     const user = await User.findById(req.params.id)    

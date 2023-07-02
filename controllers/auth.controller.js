@@ -2,6 +2,7 @@ import User from "../models/user.model.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import createError from "../utils/createError.js"
+import Stripe from "stripe";
 
 
 
@@ -16,7 +17,8 @@ export const register = async (req, res, next) =>{
             balance: 0,
             purchasedOrders: [],
             numberOfAds: 0,
-            emailVerified: false
+            emailVerified: false,
+            stripeAccount:""
             
         });
 
@@ -26,6 +28,13 @@ export const register = async (req, res, next) =>{
         //if(req.body.balance) return next(createError(502, "Forbidden operation"));
         //if(req.body.purchasedOrders) return next(createError(502, "Forbidden operation"));
         //if(req.body.numberOfAds) return next(createError(502, "Forbidden operation"));
+
+
+        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+        const account = await stripe.accounts.create({
+          type: 'express',
+        });
+        newUser.set({stripeAccount: account.id});
 
         await newUser.save();
         res.status(201).send("User has been created.");
@@ -40,6 +49,7 @@ export const register = async (req, res, next) =>{
 export const login = async (req, res, next) =>{
     
     try{
+        
         const user = await User.findOne({ username: req.body.username});    //Encontra user na DB
        
         if(!user) return next(createError(404, "User not found"));
